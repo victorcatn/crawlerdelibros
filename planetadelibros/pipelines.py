@@ -27,7 +27,7 @@ class PlanetadelibrosPipeline(object):
         file = open('%s_items.csv' % spider.name, 'w+b')
         self.files[spider] = file
         self.exporter = CsvItemExporter(file)
-        self.exporter.fields_to_export = ['titulo' ,'autor', 'editorial', 'num_paginas', 'precio']
+        self.exporter.fields_to_export = ['nombre' ,'autor', 'editorial', 'nro_paginas', 'precio','url']
         self.exporter.start_exporting()
 
     def spider_closed(self, spider):

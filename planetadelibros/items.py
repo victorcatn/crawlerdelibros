@@ -7,11 +7,11 @@
 
 import scrapy
 
-
 class BookItem(scrapy.Item):
     # define the fields for your item here like:
-    titulo = scrapy.Field()
+    nombre = scrapy.Field()
     autor = scrapy.Field()
     editorial = scrapy.Field()
-    num_paginas = scrapy.Field()
+    nro_paginas = scrapy.Field()
     precio = scrapy.Field()
+    url = scrapy.Field()

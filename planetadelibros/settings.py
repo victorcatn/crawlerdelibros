@@ -23,6 +23,15 @@ ITEM_PIPELINES = {'planetadelibros.pipelines.PlanetadelibrosPipeline': 300}
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+DATABASE = {
+    'drivername': 'sqlite',
+    # 'host': 'localhost',
+    # 'port': '5432',
+    # 'username': 'YOUR_USERNAME',
+    # 'password': 'YOUR_PASSWORD',
+    'database': 'books.sqlite'
+}
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 

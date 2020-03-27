@@ -6,32 +6,29 @@ from planetadelibros.items import BookItem
 # NC: Novela contemporanea
 class PanaCrawlerNC(CrawlSpider):
     name = "crawlerPana"
-    start_urls = ['https://www.panamericana.com.co/libros/literatura/ciencia-ficcion?PS=20']
+    start_urls = ['https://www.panamericana.com.co/buscapagina?fq=C:/1/15/73/&PS=12&sl=5e2a6963-80df-4508-b796-cb6a21d8fa05&cc=1&sm=0&PageNumber=1'] #ciencia ficcion
     allowed_domains = ['panamericana.com.co']
     i = 1
 
     def parse(self, response):
-        print("AQUI**************")
-        for libro in response.xpath('//*[@id="ResultItems_20426749"]/div/ul'):
-            item = BookItem()
-            kkk = libro.xpath('div[@class="item__showcase__category__namePrice"]/h3/a/@href').extract()
-            print(kkk)
-            request = scrapy.Request(str(kkk[0]), callback=self.parse_libro, dont_filter=True)
-            request.meta['item'] = item
+        for libro in response.css('h3.item__showcase__category__title'):
+            detalle_libro = libro.css('a::attr(href)').get()
+            request = scrapy.Request(detalle_libro, callback=self.parse_libro, dont_filter=True)
             yield request
            
    
     def parse_libro(self, response):
-        item = response.meta['item']
-        titulo = response.xpath('//*[@id="titleProduct"]/text()').extract()
-        autor = response.xpath('//*[@id="caracteristicas"]/table/tbody/tr[2]/td/text()').extract()
-        editorial = response.xpath('/html/body/main/section/div[1]/div[2]/div[2]/div[2]/div/p[1]/a/text()').extract()
-        num_paginas = response.xpath('//*[@id="caracteristicas"]/table/tbody/tr[6]/td/text()').extract()
-        precio = response.xpath('//*[@id="productP__infoCont__price__desk"]/p/span[2]/text()').extract()
+        item = BookItem()
+        nombre = response.css("div.productName::text").get()
+        autor = response.css('td.Autor-es-::text').get()
+        editorial = response.css('div.productP__infoCont__shortDecription > div > a::text').get().strip()
+        nro_paginas = response.css('td.N-°-paginas::text').get()
+        precio = response.css("#___rc-p-dv-id::attr(value)").get()
 
-        item['titulo'] = titulo
+        item['nombre'] = nombre
         item['autor'] = autor
         item['editorial'] = editorial
-        item['num_paginas'] = num_paginas
-        item['precio'] = precio
+        item['nro_paginas'] = int(nro_paginas)
+        item['precio'] = float(precio)
+        item['url'] = response.url
         return item

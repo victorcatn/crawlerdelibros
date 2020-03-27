@@ -45,7 +45,7 @@ class PlanetaCrawlerNC(scrapy.Spider):
         item['nombre'] = nombre
         item['autor'] = autor
         item['editorial'] = editorial
-        item['nro_paginas'] = nro_paginas
-        item['precio'] = precio
+        item['nro_paginas'] = int(nro_paginas)
+        item['precio'] = float(precio)
         item['url'] = response.url
         yield item

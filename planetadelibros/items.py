@@ -15,3 +15,4 @@ class BookItem(scrapy.Item):
     nro_paginas = scrapy.Field()
     precio = scrapy.Field()
     url = scrapy.Field()
+

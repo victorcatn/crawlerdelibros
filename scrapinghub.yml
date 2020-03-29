@@ -1,0 +1,3 @@
+project: planetadelibros
+
+stack: scrapy:1.6-py3

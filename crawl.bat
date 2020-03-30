@@ -1,6 +1,6 @@
 @echo off
 if "%1" == "" (
-	echo agrege el numero maximo de paginas despues del comando, por ejemplo para dos paginas es: crawl.bat 2
+	echo agregue el numero maximo de paginas despues del comando, por ejemplo para dos paginas es: crawl.bat 2
 	exit)
 
 echo realizando el scraping, espere un momento

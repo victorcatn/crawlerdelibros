@@ -28,10 +28,7 @@ class PlanetaCrawlerNC(scrapy.Spider):
 
         next_page = response.xpath('//div[@class="paginacio-seguent"]/a/@href').get()
         if next_page is not None and self.npag < int(self.maxpag):
-            print("SIGUIENTE ", next_page)
             next_page = response.urljoin(next_page)
-            #print(next_page)
-            #print("********PAGINA ", self.i)
             self.npag += 1
             yield scrapy.Request(next_page, callback=self.parse, dont_filter=True)
 
@@ -43,7 +40,9 @@ class PlanetaCrawlerNC(scrapy.Spider):
             autor = response.css('div.autors h2::text').get()
         editorial = response.css('div.segell-nom a::text').get()
         nro_paginas = response.css('#num_pagines::text').get()[19:]
-        precio = response.css('div.preu::text').get()[2:].replace(".", "")
+        precio = response.css('div.preu::text').get()
+        if precio is None: return
+        precio = precio[2:].replace(".", "")
 
         item['nombre'] = nombre
         item['autor'] = autor

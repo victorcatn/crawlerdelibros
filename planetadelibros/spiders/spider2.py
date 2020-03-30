@@ -58,13 +58,16 @@ class PanaCrawlerNC(CrawlSpider):
         editorial = response.css('div.productP__infoCont__shortDecription > div > a::text').get().strip()
         nro_paginas = response.css('td.N-°-paginas::text').get()
         precio = float(response.css("#___rc-p-dv-id::attr(value)").get())
-        if precio == 9999876: precio = None
+        if precio == 9999876: return
 
 
         item['nombre'] = nombre
         item['autor'] = autor
         item['editorial'] = editorial
-        item['nro_paginas'] = int(nro_paginas)
+        try:
+            item['nro_paginas'] = int(nro_paginas)
+        except:
+            return
         item['precio'] = precio
         item['url'] = response.url
         return item

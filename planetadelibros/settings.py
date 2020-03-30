@@ -31,6 +31,7 @@ DATABASE = {
     # 'password': 'YOUR_PASSWORD',
     'database': 'books.sqlite'
 }
+LOG_LEVEL = 'ERROR'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32

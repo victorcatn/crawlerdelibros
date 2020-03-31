@@ -33,7 +33,7 @@ class Libro(DeclarativeBase):
     editorial = Column('editorial', String)
     nro_paginas = Column('nro_paginas', Integer)
     precio = Column('precio', Float)
-    link1 = Column('link1', String)
+    url = Column('link1', String)
     link2 = Column('link2', String, default="")
     observaciones = Column('observaciones', String, default="")
     estado = Column('estado', String,)
@@ -92,14 +92,14 @@ class PlanetadelibrosPipeline(object):
         saved_book = session.query(Libro).filter(Libro.nombreautor == book.nombreautor).first()
 
         if spider.name == "crawlerPlaneta":
-            book.link1 = actualurl
+            book.url = actualurl
             if saved_book is not None: #
                 saved_book.nombre = book.nombre
                 saved_book.autor = book.autor
                 saved_book.editorial = book.editorial
                 saved_book.nro_paginas = book.nro_paginas
                 saved_book.precio = book.precio
-                saved_book.link1 = book.link1
+                saved_book.url = book.url
                 saved_book.estado = book.estado
 
                 book = saved_book
@@ -119,14 +119,14 @@ class PlanetadelibrosPipeline(object):
                 book = saved_book
                 print('{} anotaciones en panamericana'.format(book))
             else:
-                book.link1 = actualurl
+                book.url = actualurl
                 if saved_book is not None:  #
                     saved_book.nombre = book.nombre
                     saved_book.autor = book.autor
                     saved_book.editorial = book.editorial
                     saved_book.nro_paginas = book.nro_paginas
                     saved_book.precio = book.precio
-                    saved_book.link1 = book.link1
+                    saved_book.url = book.url
                     saved_book.estado = book.estado
 
                     book = saved_book

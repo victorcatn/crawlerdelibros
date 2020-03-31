@@ -33,7 +33,7 @@ class Libro(DeclarativeBase):
     editorial = Column('editorial', String)
     nro_paginas = Column('nro_paginas', Integer)
     precio = Column('precio', Float)
-    url = Column('link1', String)
+    url = Column('url', String)
     link2 = Column('link2', String, default="")
     observaciones = Column('observaciones', String, default="")
     estado = Column('estado', String,)
